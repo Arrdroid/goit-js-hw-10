@@ -42,13 +42,13 @@ export async function fetchCatByBreed(breedId) {
   catInfoContainer.innerHTML = `
   <img src="${catInfo.url}" alt="Cat Image" class="cat-image" />
   `;
+  const selectbyId = document.getElementById("id-select");
+  const slim = new SlimSelect({
+    select: selectbyId
+  });
 
   } catch (error) {
     console.error("Error fetching cat info:", error);
   }
 }
 
-const selectbyId = document.getElementById("id-select");
-const slim = new SlimSelect({
-  select: selectElement
-});
