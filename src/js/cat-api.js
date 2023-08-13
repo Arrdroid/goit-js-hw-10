@@ -1,4 +1,5 @@
 import axios from "axios";
+import SlimSelect from 'slim-select'
 
 axios.defaults.headers.common["x-api-key"] = "live_a7nkCJOI4lOXcdOz3Nuqe9HSeKQ6nrSw0vQnTtPoetJ1HHkAHaRUZxH3vqSIyFTk";
 
@@ -29,7 +30,7 @@ export async function fetchCatByBreed(breedId) {
     );
     const catInfo = response.data[0];
     const catBreed = catInfo.breeds[0];
-
+    console.log(catBreed);
   const catInfoContainer = document.querySelector(".cat-info");
   const catDetailsContainer = document.querySelector(".cat-details");
 
@@ -46,3 +47,8 @@ export async function fetchCatByBreed(breedId) {
     console.error("Error fetching cat info:", error);
   }
 }
+
+const selectbyId = document.getElementById("id-select");
+const slim = new SlimSelect({
+  select: selectElement
+});

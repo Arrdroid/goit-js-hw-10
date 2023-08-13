@@ -1,4 +1,5 @@
 import { fetchBreeds, fetchCatByBreed } from "./cat-api.js";
+import SlimSelect from 'slim-select'
 
 document.addEventListener("DOMContentLoaded", async () => {
   const breedSelect = document.querySelector(".breed-select");
