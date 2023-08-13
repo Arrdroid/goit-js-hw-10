@@ -3,9 +3,9 @@ import SlimSelect from 'slim-select'
 
 axios.defaults.headers.common["x-api-key"] = "live_a7nkCJOI4lOXcdOz3Nuqe9HSeKQ6nrSw0vQnTtPoetJ1HHkAHaRUZxH3vqSIyFTk";
 
-export async function fetchBreeds() {
+export function fetchBreeds() {
   try {
-    const response = await axios.get("https://api.thecatapi.com/v1/breeds");
+    const response = axios.get("https://api.thecatapi.com/v1/breeds");
     const breeds = response.data;
 
     const breedSelect = document.querySelector(".breed-select");
@@ -23,9 +23,9 @@ export async function fetchBreeds() {
   }
 }
 
-export async function fetchCatByBreed(breedId) {
+export function fetchCatByBreed(breedId) {
   try {
-    const response = await axios.get(
+    const response = axios.get(
       `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`
     );
     const catInfo = response.data[0];
