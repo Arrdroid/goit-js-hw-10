@@ -1,7 +1,7 @@
 import { fetchBreeds, fetchCatByBreed } from "./cat-api.js";
 import SlimSelect from 'slim-select'
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const breedSelect = document.querySelector(".breed-select");
   const loader = document.querySelector(".loader");
   const error = document.querySelector(".error");
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   error.style.display = "none";
 
   try {
-    const breeds = fetchBreeds();
+    const breeds = await fetchBreeds();
     loader.style.display = "none";
     breedSelect.style.display = "block";
 
