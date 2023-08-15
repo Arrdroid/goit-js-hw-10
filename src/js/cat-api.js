@@ -1,5 +1,5 @@
 import axios from "axios";
-import SlimSelect from 'slim-select'
+import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
 
 axios.defaults.headers.common["x-api-key"] = "live_a7nkCJOI4lOXcdOz3Nuqe9HSeKQ6nrSw0vQnTtPoetJ1HHkAHaRUZxH3vqSIyFTk";
@@ -7,20 +7,7 @@ const breedSelect = document.querySelector(".breed-select");
 
 export function fetchBreeds() {
   try {
-    const response = axios
-      .get('https://api.thecatapi.com/v1/breeds')
-      .then(response => response.data)
-      .then(breeds => {
-        const allTheBreeds = breeds
-          .map(breed => `<option value= ${breed.id}>${breed.name}</option>`)
-          .join('');
-
-        breedSelect.insertAdjacentHTML('beforeend', allTheBreeds);
-
-        const slim = new SlimSelect({
-          select: '.breed-select',
-        });
-      });
+    return axios.get('https://api.thecatapi.com/v1/breeds').then(response => response.data)
   } catch (error) {
     console.error('Error fetching breeds:', error);
   }
@@ -56,7 +43,5 @@ export function fetchCatByBreed(breedId) {
       
   } catch (error) {
     console.error("Error fetching cat info:", error);
-  } finally { loarer.style.display = "none" };
+  } finally {loarer.style.display = "none"};
 }
-
-
