@@ -18,9 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     breedSelect.addEventListener("change", event => {
       const selectedBreedId = event.target.value;
       loader.style.display = "block";
-      fetchCatByBreed(selectedBreedId).finally(() => {
-        loader.style.display = "none";
-      });
+      
     });
   } catch (fetchError) {
     loader.style.display = "none";

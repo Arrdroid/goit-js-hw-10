@@ -56,7 +56,7 @@ export function fetchCatByBreed(breedId) {
       
   } catch (error) {
     console.error("Error fetching cat info:", error);
-  }
+  } finally { loarer.style.display = "none" };
 }
 
 
