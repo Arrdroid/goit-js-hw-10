@@ -15,13 +15,35 @@ document.addEventListener("DOMContentLoaded", () => {
   try {
     const breeds = fetchBreeds();
     loader.style.display = "none";
-    breedSelect.style.display = "block";
+    breedSelect.style.display = "flex";
 
     breedSelect.addEventListener("change", event => {
       const selectedBreedId = event.target.value;
       loader.style.display = "block";
-      
+      fetchCatByBreed(selectedBreedId).then(data => {
+        const catInfo = data[0];
+        const catBreed = catInfo.breeds[0];
+
+        if (!catInfo) {
+          alert("Empty data received");
+          return;
+        }
+
+        const catDetailsContainer = document.querySelector(".cat-details");
+        const catInfoContainer = document.querySelector(".cat-info");
+
+        catDetailsContainer.innerHTML = `
+          <p><strong class="text-info">Breed:</strong> ${catBreed.name}</p>
+          <p class="text-info">${catBreed.description}</p>
+          <p><strong class="text-info">Temperament:</strong> ${catBreed.temperament}</p>
+        `;
+
+        catInfoContainer.innerHTML = `
+          <img src="${catInfo.url}" alt="Cat Image" class="cat-image" />
+        `;
+      });
     });
+
   } catch (fetchError) {
     loader.style.display = "none";
     error.style.display = "block";
@@ -37,7 +59,7 @@ try {
           .map(breed => `<option value= ${breed.id}>${breed.name}</option>`)
           .join('');
         loader.style.display = "none";
-        breedSelect.style.display = "block";
+        breedSelect.style.display = "flex";
         breedSelect.insertAdjacentHTML('beforeend', allTheBreeds);
 
         const slim = new SlimSelect({
