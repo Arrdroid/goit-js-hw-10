@@ -21,19 +21,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const selectedBreedId = event.target.value;
       loader.style.display = "block";
       fetchCatByBreed(selectedBreedId).then(data => {
-        const catInfo = data[0];
-        console.log(catInfo);
-        const catBreed = catInfo.breeds[0];
-        console.log(catBreed);
-        
-        if (!catInfo || !catBreed) {
+        if (!data[0]) {
           alert("Empty data received");
-          catDetailsContainer.innerHTML = ``;
-          catInfoContainer.innerHTML = ``;
+          document.querySelector(".container").style.display = "none";
+          
           loader.style.display = "none";
           error.style.display = "block";
           return;
         }
+        
+        
+        const catInfo = data[0];
+        console.log(catInfo);
+        const catBreed = catInfo.breeds[0];
+        console.log(catBreed);
+
 
         const catDetailsContainer = document.querySelector(".cat-details");
         const catInfoContainer = document.querySelector(".cat-info");
