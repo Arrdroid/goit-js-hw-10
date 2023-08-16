@@ -22,10 +22,16 @@ document.addEventListener("DOMContentLoaded", () => {
       loader.style.display = "block";
       fetchCatByBreed(selectedBreedId).then(data => {
         const catInfo = data[0];
+        console.log(catInfo);
         const catBreed = catInfo.breeds[0];
-
-        if (!catInfo) {
+        console.log(catBreed);
+        
+        if (!catInfo || !catBreed) {
           alert("Empty data received");
+          catDetailsContainer.innerHTML = ``;
+          catInfoContainer.innerHTML = ``;
+          loader.style.display = "none";
+          error.style.display = "block";
           return;
         }
 
