@@ -30,7 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
         
-        
+        loader.style.display = "none";
+        error.style.display = "none";
         const catInfo = data[0];
         console.log(catInfo);
         const catBreed = catInfo.breeds[0];
