@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
       const selectedBreedId = event.target.value;
       loader.style.display = "block";
+      error.style.display = "none";
       fetchCatByBreed(selectedBreedId).then(data => {
         const catDetailsContainer = document.querySelector(".cat-details");
         const catInfoContainer = document.querySelector(".cat-info");
