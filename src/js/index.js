@@ -19,14 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
     breedSelect.style.display = "flex";
 
     breedSelect.addEventListener("change", event => {
-      document.querySelector(".container").style.display = "flex";
       
       const selectedBreedId = event.target.value;
       loader.style.display = "block";
       fetchCatByBreed(selectedBreedId).then(data => {
+        const catDetailsContainer = document.querySelector(".cat-details");
+        const catInfoContainer = document.querySelector(".cat-info");
+
         if (!data[0]) {
           errorWhileGettingCatData ();
-          document.querySelector(".container").style.display = "none";
+          catDetailsContainer.innerHTML = "";
+          catInfoContainer.innerHTML = "";
           
           loader.style.display = "none";
           error.style.display = "block";
@@ -41,9 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const catBreed = catInfo.breeds[0];
         console.log(catBreed);
 
-
-        const catDetailsContainer = document.querySelector(".cat-details");
-        const catInfoContainer = document.querySelector(".cat-info");
 
         catDetailsContainer.innerHTML = `
           <p><strong class="text-info">Breed:</strong> ${catBreed.name}</p>
