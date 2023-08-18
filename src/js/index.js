@@ -2,6 +2,7 @@ import { fetchBreeds, fetchCatByBreed } from "./cat-api.js";
 import axios from "axios";
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
+import Notiflix from 'notiflix';
 
 document.addEventListener("DOMContentLoaded", () => {
   const breedSelect = document.querySelector(".breed-select");
@@ -18,11 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
     breedSelect.style.display = "flex";
 
     breedSelect.addEventListener("change", event => {
+      document.querySelector(".container").style.display = "flex";
+      
       const selectedBreedId = event.target.value;
       loader.style.display = "block";
       fetchCatByBreed(selectedBreedId).then(data => {
         if (!data[0]) {
-          alert("Empty data received");
+          errorWhileGettingCatData ();
           document.querySelector(".container").style.display = "none";
           
           loader.style.display = "none";
@@ -32,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         loader.style.display = "none";
         error.style.display = "none";
+        
         const catInfo = data[0];
         console.log(catInfo);
         const catBreed = catInfo.breeds[0];
@@ -85,3 +89,6 @@ try {
     error.style.display = "block";
   }
 
+const errorWhileGettingCatData = () => {
+  Notiflix.Notify.failure('This cat is absent in our database!');
+};
